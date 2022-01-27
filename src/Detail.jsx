@@ -6,7 +6,7 @@ import PageNotFound from "./PageNotFound"
 
 
 
-export default function Detail() {
+export default function Detail(props) {
   const {id} = useParams()
   const navigate = useNavigate()
   const [sku, setSku] = useState('')
@@ -31,7 +31,10 @@ export default function Detail() {
       </select>
 
       <p>
-        <button disabled={!sku} onClick={() => navigate('/cart')} className="btn btn-primary">Add to cart</button>
+        <button disabled={!sku} onClick={() => {
+          props.addToCart(id, sku)
+          navigate('/cart')
+        }} className="btn btn-primary">Add to cart</button>
       </p>
       <img src={`/images/${product.image}`} alt={product.category} />
     </div>
